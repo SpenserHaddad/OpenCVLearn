@@ -18,10 +18,8 @@ def add_salt_pepper_noise(src, pa, pb):
 
 
 def add_gaussian_noise(src, mean, sigma):
-    import ipdb
-    ipdb.set_trace()
     noise = np.random.normal(loc=mean, scale=sigma, size=src.shape)
-    return src + noise
+    return src + noise.astype('uint8')
 
 
 def test_filters(src, win_suffix=""):
@@ -31,12 +29,12 @@ def test_filters(src, win_suffix=""):
     gaussian_image = cv2.GaussianBlur(src, (3, 3), 1.5)
     cv2.imshow("Gaussian Filter" + win_suffix, gaussian_image)
 
-    # median_filt_image = cv2.medianBlur(src, 3)
-    # cv2.imshow("Median Filter" + win_suffix, median_filt_image)
+    median_filt_image = cv2.medianBlur(src, 3)
+    cv2.imshow("Median Filter" + win_suffix, median_filt_image)
 
 
 if __name__ == "__main__":
-    image = cv2.imread(sys.argv[1])
+    image = cv2.imread(sys.argv[1], 0)
     cv2.namedWindow("Original Image", cv2.WINDOW_AUTOSIZE)
     cv2.imshow("Original Image", image)
 
