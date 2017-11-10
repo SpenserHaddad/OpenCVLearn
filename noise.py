@@ -23,11 +23,14 @@ def add_gaussian_noise(src, mean, sigma):
 
 
 def test_filters(src, win_suffix=""):
-    blur_image = cv2.blur(src, (3, 3))
-    cv2.imshow("Box Filter" + win_suffix, blur_image)
+    for kernal_size in ((3, 3), (5, 5), (7, 7)):
+        blur_image = cv2.blur(src, (3, 3))
+        cv2.imshow(f"Box Filter (Kernal Size = {kernal_size})" + win_suffix,
+                   blur_image)
 
-    gaussian_image = cv2.GaussianBlur(src, (3, 3), 1.5)
-    cv2.imshow("Gaussian Filter" + win_suffix, gaussian_image)
+        gaussian_image = cv2.GaussianBlur(src, (3, 3), 1.5)
+        cv2.imshow(f"Gaussian Filter (Kernal Size = {kernal_size})" + win_suffix,
+                   gaussian_image)
 
     median_filt_image = cv2.medianBlur(src, 3)
     cv2.imshow("Median Filter" + win_suffix, median_filt_image)
@@ -38,14 +41,28 @@ if __name__ == "__main__":
     cv2.namedWindow("Original Image", cv2.WINDOW_AUTOSIZE)
     cv2.imshow("Original Image", image)
 
-    gaussian_image = add_gaussian_noise(image, 0, 5)
+    gaussian_image = add_gaussian_noise(image, mean=0, sigma=5)
     cv2.imshow("Gaussian Noise", gaussian_image)
+    test_filters(gaussian_image, win_suffix="(Gaussian Noise)")
 
-    test_filters(gaussian_image)
+    for mean in (0, 5, 10, 20):
+        gaussian_image = add_gaussian_noise(image, mean=mean, sigma=5)
+        cv2.imshow(f"Gaussian Noise (Mean = {mean})", gaussian_image)
+
+    for sigma in (0, 20, 50, 100):
+        gaussian_image = add_gaussian_noise(image, mean=0, sigma=sigma)
+        cv2.imshow(f"Gaussian Noise (Sigma = {sigma})", gaussian_image)
 
     salt_pepper_image = add_salt_pepper_noise(image, 0.01, 0.01)
     cv2.imshow("Salt and Pepper Noise", salt_pepper_image)
+    test_filters(salt_pepper_image, "(Salt and Pepper Noise)")
 
-    test_filters(salt_pepper_image, " 2")
+    for value in (0.01, 0.03, 0.05, 0.4):
+        modified_salt_image = add_salt_pepper_noise(image, value, 0.01)
+        modified_pepper_image = add_salt_pepper_noise(image, 0.1, value)
+        cv2.imshow(f"Salt and Pepper Noise (Salt = {value})", modified_salt_image)
+        cv2.imshow(f"Salt and Pepper Noise (Pepper = {value})", modified_pepper_image)
 
     cv2.waitKey(0)
+
+
