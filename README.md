@@ -6,5 +6,5 @@
 ## Overview
 
 * Answered questions 1 - 3
-    * Answers are in answers.md
+    * Answers are in [answers.md](answers.md)
 * All examples were done using Python 3.6. This code uses features only present in Python 3.6, so it will not work with older versions.
