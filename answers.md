@@ -2,7 +2,7 @@
 
 *Question: How does a program read the cvMat object, in particular, what is the order of the pixel structure?*
 
-Answer:
+Answer: A program would first index the height/rows and cols/width fields of the cvMat object to get the pixel data for the required location. The pixel structure will then vary based on the color scheme used, but usually would be accessed as a 3-value BGR struct.
 
 ## Exercise 2
 
