@@ -4,7 +4,7 @@
 
 
 ## Overview
-    * Answered questions 1 - 3
-    * All examples were done using Python 3.6. Will not work with older versions,
-        due to string interpolations.
-    * View answers.md for answers.
+
+* Answered questions 1 - 3
+    * Answers are in answers.md
+* All examples were done using Python 3.6. This code uses features only present in Python 3.6, so it will not work with older versions.
